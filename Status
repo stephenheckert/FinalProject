@@ -1,0 +1,29 @@
+# Status Report
+
+#### Your name
+
+Stephen Hekert
+
+#### Your section leader's name
+
+Tamara Katic
+
+#### Project title
+
+Double Lopp Board Game
+
+***
+
+Short answers for the below questions suffice. If you want to alter your plan for your project (and obtain approval for the same), be sure to email your section leader directly!
+
+#### What have you done for your project so far?
+
+So far we have a solid idea for how we want the game to work. Currently we have the dice working and a prompt that asks how many players are playing in the game. The game ends after someone reachers a score of 60. The board will only be 30 spaces. 
+
+#### What have you not done for your project yet?
+
+At this point we do not have "special" spaces working. For example a space that makes you go back 3 or move forward 1. Also we need the code to stop and let each player take turns instead of simulating one person at a time. 
+
+#### What problems, if any, have you encountered?
+
+As of right now our main problem is not having the game simulate the whole way through by itself. I also want to be able to add in the option to pick the character you want to play as. At the moment I am unsure how to do that. 
