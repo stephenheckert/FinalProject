@@ -1,0 +1,128 @@
+print("Fortune Road Board Game")
+print("Objective - There are 50 spots around the board, the goal of the game is to be the first person to complete the whole 50 space cycle around the board")
+print("Rules - Once the game has started each player will roll ONE die and move forward that number of spaces. The first person to travel 50 spaces and complete the cycle around the board will be the winner!")
+print("But, beware! Some spots may send you back to the start, allow you to jump forward or backwards on the board, or give/take a roll from you")
+
+import random
+
+playerPoints = []
+minPlayers = 2
+maxPlayers = 4
+players = 0
+maxscore = 50
+amountOfDice = 1
+gameRound = 0
+
+def setPlayers():
+    while True:
+        players = input("How many players are playing(2-4)?\n")
+        if players.isdigit():
+            players = int(players)
+            if minPlayers <= players and maxPlayers >= players:
+                for i in range(players):
+                    playerPoints.append(0)
+                return players
+            
+
+def diceroll(player, amountOfDice):
+    throw = 0
+    print("\tPlayer {0}s turn:".format(player + 1))
+    input('Press enter to roll')
+
+        
+    for i in range(amountOfDice):
+        die = random.randint(1, 6)
+        print("\t\tPlayer {0} has rolled a {2}".format(player + 1, i + 1, die))
+        throw += die
+        playerPoints[player] += throw
+        
+        
+        if playerPoints[player] == 5:
+            print('You landed on space 5, Lucky Space! Move forward 3 spaces!')
+            print("\t\tPlayer {0} is now on space: {1}".format(player + 1, (playerPoints[player] + 3)))
+            playerPoints[player] = 8
+                    
+
+                    
+        elif playerPoints[player] == 10:
+            print("You landed on space 10, Oh no! move back 2 spaces!")
+            print("\t\tPlayer {0} is now on space: {1}".format(player + 1, (playerPoints[player] - 2)))
+            playerPoints[player] = 8        
+                
+                
+        elif playerPoints[player] == 15:
+            print('You landed on space 15, Oh no! go back to the start!')
+            print("\t\tPlayer {0} is now on space: {1}".format(player + 1, (playerPoints[player] - 15)))
+            playerPoints[player] = 0
+
+
+        elif playerPoints[player] == 20:
+            print('You landed on space 20, Woohoo! move forward 3 spaces!')
+            print("\t\tPlayer {0} is now on space: {1}".format(player + 1, (playerPoints[player] + 3)))
+            playerPoints[player] = 23
+                
+                    
+
+        elif playerPoints[player] == 25:
+            print("\t\tplayer {0} is on space: {1}".format(player + 1, playerPoints[player]))
+            print('Congrats! You landed on space 25, Roll Again!')
+            input('Press Enter to roll')
+            print("\t\tPlayer {0} has rolled a {2}".format(player + 1, i + 1, die))
+            print("\t\tplayer {0} is on space: {1}".format(player + 1, playerPoints[player] + throw))
+            playerPoints[player] = (25 + throw)
+
+
+        elif playerPoints[player] == 30:
+            print("You landed on space 30, Super lucky spot! Move forward 6 spaces!")
+            print("\t\tPlayer {0} is now on space: {1}".format(player + 1, (playerPoints[player] + 6)))
+            playerPoints[player] = 36
+
+
+        elif playerPoints[player] == 35:
+            print("You landed on space 35, Super unlucky spot! Move back 6 spaces :(")
+            print("\t\tPlayer {0} is now on space: {1}".format(player + 1, (playerPoints[player] - 6)))
+            playerPoints[player] = 29
+
+
+        elif playerPoints[player] == 40:
+            print("\t\tplayer {0} is on space: {1}".format(player + 1, playerPoints[player]))
+            print("Congrats on reaching spot 40! Please roll again!")
+            input("Press Enter to roll")
+            print("\t\tPlayer {0} has rolled a {2}".format(player + 1, i + 1, die))
+            print("\t\tplayer {0} is on space: {1}".format(player + 1, playerPoints[player] + throw))
+            playerPoints[player] = (40 + throw)
+
+
+        elif playerPoints[player] == 48:
+            print("\t\tplayer {0} is on space: {1}".format(player + 1, playerPoints[player]))
+            print("Uh Oh...go back to the start :O")
+            print("\t\tPlayer {0} is now on space: {1}".format(player + 1, (playerPoints[player] - 48)))
+            playerPoints[player] = 0
+
+            
+        else:
+            print("\t\tplayer {0} is on space: {1}".format(player + 1, playerPoints[player]))
+
+        
+def checkWin(maxscore):
+    for player in range(players):
+        if (playerPoints[player] >= maxscore):
+            print("Player {0} wins!".format(player + 1))
+            return True
+
+    return False    
+
+    
+if __name__ == "__main__":
+    players = setPlayers()
+    while True:
+        gameRound += 1
+        print("ROUND: {0}".format(gameRound))
+        for i in range(players):
+            diceroll(i, amountOfDice)
+        if (checkWin(maxscore)):
+            break
+
+
+
+
